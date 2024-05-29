@@ -5,6 +5,7 @@ mod handlers;
 
 use handlers::input::handle_input;
 use handlers::remove::handle_remove;
+use handlers::dir::handle_dir;
 
 fn main() {
     let matches = arguments::build_app().get_matches();
@@ -17,7 +18,11 @@ fn main() {
     };
 
     if matches.is_present("remove") {
-        handle_remove(full_path);
+        handle_remove(&full_path);
+    }
+    if matches.is_present("dir") {
+        println!("Dir flag is set");
+        handle_dir(&full_path);
     }
 
 }

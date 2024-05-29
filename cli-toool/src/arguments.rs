@@ -13,4 +13,9 @@ pub fn build_app() -> App<'static> {
             .long("remove")
             .help("If set will delete the input file")
             .takes_value(false))
+        .arg(Arg::with_name("dir")
+            .short('d')
+            .long("dir")
+            .help("If set will treate the input file as a directory and remove it recursively")
+            .takes_value(false))
 }

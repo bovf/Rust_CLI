@@ -1,7 +1,7 @@
 use std::fs;
 
 
-pub fn handle_remove(full_path: Option<String>) {
+pub fn handle_remove(full_path: &Option<String>) {
     if let Some(ref path) = full_path {
         println!("Remove flag is set");
         println!("Removing file...");
