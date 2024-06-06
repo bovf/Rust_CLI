@@ -18,4 +18,7 @@ pub fn build_app() -> App<'static> {
             .long("dir")
             .help("If set will treate the input file as a directory and remove it recursively")
             .takes_value(false))
+        .arg(Arg::with_name("dry-run")
+             .long("dry-run")
+             .help("Simulates the actions without making changes"))
 }
