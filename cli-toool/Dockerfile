@@ -2,7 +2,7 @@
 FROM rust:latest as build
 
 # Set the working directory
-WORKDIR /usr/src/cli-tool
+WORKDIR /usr/src/cli-toool
 
 # Copy the Cargo.toml and Cargo.lock files
 COPY Cargo.toml Cargo.lock ./
@@ -25,8 +25,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/local/bin
 
 # Copy the compiled binary from the build stage
-COPY --from=build /usr/src/cli-tool/target/release/cli-toool .
+COPY --from=build /usr/src/cli-toool/target/release/cli-toool .
+
+# Ensure the binary has execute permissions
+RUN chmod +x cli-toool
 
 # Set the entrypoint to the binary
 ENTRYPOINT ["/bin/bash"]
-

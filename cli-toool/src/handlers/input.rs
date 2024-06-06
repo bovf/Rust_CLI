@@ -1,23 +1,33 @@
-use std::fs;
+use crate::command::Command;
 
+pub struct InputCommand {
+    input: String,
+}
 
-pub fn handle_input(input: &str) -> Option<String> {
-    if file_exists(input) {
-        println!("Input file: {}", input);
-        let full_path = get_file_full_path(input);
-        println!("Full path: {}", full_path);
-        Some(full_path)
-    } else {
-        println!("File does not exist");
-        None
+impl InputCommand {
+    pub fn new(input: String) -> Self {
+        InputCommand { input }
+    }
+}
+
+impl Command for InputCommand {
+    fn execute(&self) {
+        if file_exists(&self.input) {
+            println!("Input file: {}", self.input);
+            let full_path = get_file_full_path(&self.input);
+            println!("Full path: {}", full_path);
+        } else {
+            println!("File does not exist");
+        }
     }
 }
 
 fn file_exists(filepath: &str) -> bool {
-    fs::metadata(filepath).is_ok()
+    std::fs::metadata(filepath).is_ok()
 }
 
 fn get_file_full_path(filepath: &str) -> String {
-    let full_path = fs::canonicalize(filepath).unwrap();
+    let full_path = std::fs::canonicalize(filepath).unwrap();
     full_path.to_str().unwrap().to_string()
 }
+
